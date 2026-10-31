@@ -1,3 +1,18 @@
 [gd_scene format=3 uid="uid://ie26i8p0eqdp"]
 
+[ext_resource type="PackedScene" uid="uid://ct0v1fkfdtsb2" path="res://entities/player_character.tscn" id="1_w2twt"]
+
 [node name="Node2D" type="Node2D" unique_id=794196069]
+
+[node name="P_Background" type="Parallax2D" parent="." unique_id=1788621208]
+
+[node name="PL_Background" type="ParallaxLayer" parent="P_Background" unique_id=173072261]
+
+[node name="PL_Trees" type="ParallaxLayer" parent="P_Background" unique_id=1442028915]
+
+[node name="PL_Grass" type="ParallaxLayer" parent="P_Background" unique_id=1164872270]
+
+[node name="N_ActionLayer" type="Node2D" parent="." unique_id=1306367297]
+
+[node name="PlayerCharacter" parent="." unique_id=1709040866 instance=ExtResource("1_w2twt")]
+position = Vector2(640, 563)
