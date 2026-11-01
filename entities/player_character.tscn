@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ct0v1fkfdtsb2"]
 
-[ext_resource type="Texture2D" uid="uid://0xn43yqgk84m" path="res://assets/pc_animation_walking_cycle.png" id="1_t8xdw"]
+[ext_resource type="Texture2D" uid="uid://0xn43yqgk84m" path="res://assets/player_character/pc_animation_walking_cycle.png" id="1_t8xdw"]
 [ext_resource type="Script" uid="uid://b4vugwl6chfgo" path="res://scripts/player_character.gd" id="1_yqde8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8xdw"]
