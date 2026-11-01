@@ -1,6 +1,48 @@
 [gd_scene format=3 uid="uid://s1xhpywv7fq3"]
 
 [ext_resource type="Script" uid="uid://7tdo65elajpj" path="res://scripts/tree.gd" id="1_krnsv"]
+[ext_resource type="Texture2D" uid="uid://csht3xke2ptdg" path="res://assets/tree/main_tree_base.png" id="2_mac5r"]
+[ext_resource type="Texture2D" uid="uid://doe813xnk203a" path="res://assets/tree/main_tree_1.png" id="3_5g01w"]
+[ext_resource type="Texture2D" uid="uid://ddhrrlggo7f0n" path="res://assets/tree/main_tree_2.png" id="4_c0m52"]
+[ext_resource type="Texture2D" uid="uid://vq8cpdsk81e8" path="res://assets/tree/main_tree_3.png" id="5_o7cc1"]
+[ext_resource type="Texture2D" uid="uid://cisc26vpkhq2a" path="res://assets/tree/main_tree_4.png" id="6_bsxjv"]
+[ext_resource type="Texture2D" uid="uid://bxcjqec16esjm" path="res://assets/tree/main_tree_5.png" id="7_xj121"]
+[ext_resource type="Texture2D" uid="uid://sy3i6emkin55" path="res://assets/tree/main_tree_6.png" id="8_s2u16"]
+[ext_resource type="Texture2D" uid="uid://dhielqtylrv5d" path="res://assets/tree/main_tree_7.png" id="9_5wnc7"]
 
-[node name="Node2D" type="Node2D" unique_id=1174151102]
+[node name="Tree" type="Node2D" unique_id=1174151102]
+scale = Vector2(0.37, 0.37)
 script = ExtResource("1_krnsv")
+
+[node name="tree_base" type="Sprite2D" parent="." unique_id=1185039886]
+texture = ExtResource("2_mac5r")
+
+[node name="tree_parts" type="Node2D" parent="." unique_id=409330448]
+
+[node name="tree_1" type="Sprite2D" parent="tree_parts" unique_id=1339788396]
+position = Vector2(0.24323335, -298.62158)
+texture = ExtResource("3_5g01w")
+
+[node name="tree_2" type="Sprite2D" parent="tree_parts" unique_id=319237954]
+position = Vector2(0.24323335, -609.6216)
+texture = ExtResource("4_c0m52")
+
+[node name="tree_3" type="Sprite2D" parent="tree_parts" unique_id=675053723]
+position = Vector2(0.24323335, -920.6216)
+texture = ExtResource("5_o7cc1")
+
+[node name="tree_4" type="Sprite2D" parent="tree_parts" unique_id=140108357]
+position = Vector2(0.24323335, -1231.6216)
+texture = ExtResource("6_bsxjv")
+
+[node name="tree_5" type="Sprite2D" parent="tree_parts" unique_id=998684268]
+position = Vector2(0.24323335, -1542.6216)
+texture = ExtResource("7_xj121")
+
+[node name="tree_6" type="Sprite2D" parent="tree_parts" unique_id=1820104638]
+position = Vector2(0.24323335, -1853.6216)
+texture = ExtResource("8_s2u16")
+
+[node name="tree_7" type="Sprite2D" parent="tree_parts" unique_id=1827711899]
+position = Vector2(0.24323335, -2164.6216)
+texture = ExtResource("9_5wnc7")
