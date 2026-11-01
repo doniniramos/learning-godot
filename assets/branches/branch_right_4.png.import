@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0xn43yqgk84m"
-path="res://.godot/imported/pc_animation_walking_cycle.png-64a79824ce3307f0837cca87895071ef.ctex"
+uid="uid://l5wd1uaeybc8"
+path="res://.godot/imported/branch_right_4.png-b461f8a2614d13ae9968fd77639a6e01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pc_animation_walking_cycle.png"
-dest_files=["res://.godot/imported/pc_animation_walking_cycle.png-64a79824ce3307f0837cca87895071ef.ctex"]
+source_file="res://assets/branches/branch_right_4.png"
+dest_files=["res://.godot/imported/branch_right_4.png-b461f8a2614d13ae9968fd77639a6e01.ctex"]
 
 [params]
 
