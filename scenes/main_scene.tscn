@@ -1,18 +1,38 @@
 [gd_scene format=3 uid="uid://ie26i8p0eqdp"]
 
+[ext_resource type="Texture2D" uid="uid://dout0c1t4g4l" path="res://assets/background/background_farest.png" id="1_gubc5"]
 [ext_resource type="PackedScene" uid="uid://ct0v1fkfdtsb2" path="res://entities/player_character.tscn" id="1_w2twt"]
+[ext_resource type="Texture2D" uid="uid://cium2wkdnep1e" path="res://assets/background/background_grass.png" id="2_rt2n2"]
+[ext_resource type="Texture2D" uid="uid://de7rxa1sqfv6h" path="res://assets/background/background_far_left.png" id="3_c16ls"]
+[ext_resource type="Texture2D" uid="uid://wxovfhyhtdkr" path="res://assets/background/background_far_right.png" id="4_18nlu"]
+[ext_resource type="PackedScene" uid="uid://s1xhpywv7fq3" path="res://entities/tree.tscn" id="5_rt2n2"]
 
 [node name="Node2D" type="Node2D" unique_id=794196069]
 
-[node name="P_Background" type="Parallax2D" parent="." unique_id=1788621208]
+[node name="N_Background" type="Node2D" parent="." unique_id=1508422960]
+position = Vector2(640, 311)
+scale = Vector2(0.37, 0.37)
 
-[node name="PL_Background" type="ParallaxLayer" parent="P_Background" unique_id=173072261]
+[node name="S_BackgroundFarest" type="Sprite2D" parent="N_Background" unique_id=1313447523]
+texture = ExtResource("1_gubc5")
 
-[node name="PL_Trees" type="ParallaxLayer" parent="P_Background" unique_id=1442028915]
+[node name="S_TreesLeft" type="Sprite2D" parent="N_Background" unique_id=660805911]
+position = Vector2(-1037.8379, -151.35135)
+texture = ExtResource("3_c16ls")
 
-[node name="PL_Grass" type="ParallaxLayer" parent="P_Background" unique_id=1164872270]
+[node name="S_TreesRight" type="Sprite2D" parent="N_Background" unique_id=109403525]
+position = Vector2(1024.3243, -100)
+texture = ExtResource("4_18nlu")
+
+[node name="S_BackgroundGrass" type="Sprite2D" parent="N_Background" unique_id=2133899565]
+position = Vector2(0, 620)
+texture = ExtResource("2_rt2n2")
 
 [node name="N_ActionLayer" type="Node2D" parent="." unique_id=1306367297]
+position = Vector2(640, 311)
+
+[node name="Tree" parent="N_ActionLayer" unique_id=1174151102 instance=ExtResource("5_rt2n2")]
+position = Vector2(23, 315)
 
 [node name="PlayerCharacter" parent="." unique_id=1709040866 instance=ExtResource("1_w2twt")]
-position = Vector2(640, 563)
+position = Vector2(660, 587)
