@@ -6,11 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://de7rxa1sqfv6h" path="res://assets/background/background_far_left.png" id="3_c16ls"]
 [ext_resource type="Texture2D" uid="uid://wxovfhyhtdkr" path="res://assets/background/background_far_right.png" id="4_18nlu"]
 [ext_resource type="PackedScene" uid="uid://s1xhpywv7fq3" path="res://entities/tree.tscn" id="5_rt2n2"]
+[ext_resource type="Texture2D" uid="uid://cksoxgthpuadp" path="res://assets/foreground/foreground_left_top.png" id="7_6wevv"]
+[ext_resource type="Texture2D" uid="uid://b1hr78tbbvpar" path="res://assets/foreground/foreground_left_bottom.png" id="8_e1cbu"]
+[ext_resource type="Texture2D" uid="uid://du83avwts7ud5" path="res://assets/foreground/foreground_right_top.png" id="9_mngbo"]
+[ext_resource type="Texture2D" uid="uid://ct33xvnrjb0q6" path="res://assets/foreground/foreground_right_bottom.png" id="10_4w45t"]
 
 [node name="Node2D" type="Node2D" unique_id=794196069]
 
 [node name="N_Background" type="Node2D" parent="." unique_id=1508422960]
-position = Vector2(640, 311)
+position = Vector2(640, 267)
 scale = Vector2(0.37, 0.37)
 
 [node name="S_BackgroundFarest" type="Sprite2D" parent="N_Background" unique_id=1313447523]
@@ -29,10 +33,30 @@ position = Vector2(0, 620)
 texture = ExtResource("2_rt2n2")
 
 [node name="N_ActionLayer" type="Node2D" parent="." unique_id=1306367297]
-position = Vector2(640, 311)
+position = Vector2(640, 267)
 
 [node name="Tree" parent="N_ActionLayer" unique_id=1174151102 instance=ExtResource("5_rt2n2")]
 position = Vector2(23, 315)
 
 [node name="PlayerCharacter" parent="." unique_id=1709040866 instance=ExtResource("1_w2twt")]
-position = Vector2(660, 587)
+position = Vector2(660, 543)
+
+[node name="N_Foreground" type="Node2D" parent="." unique_id=2143932076]
+position = Vector2(0, -44)
+scale = Vector2(0.37, 0.37)
+
+[node name="S_ForegroundLeftTop" type="Sprite2D" parent="N_Foreground" unique_id=1937235257]
+position = Vector2(548.6487, 445.94595)
+texture = ExtResource("7_6wevv")
+
+[node name="S_ForegroundLeftBottom" type="Sprite2D" parent="N_Foreground" unique_id=315318741]
+position = Vector2(704.1622, 1743.8109)
+texture = ExtResource("8_e1cbu")
+
+[node name="S_ForegroundRightTop" type="Sprite2D" parent="N_Foreground" unique_id=956015037]
+position = Vector2(3070.2703, 729.72974)
+texture = ExtResource("9_mngbo")
+
+[node name="S_ForegroundRightBottom" type="Sprite2D" parent="N_Foreground" unique_id=2142539146]
+position = Vector2(3021.6216, 1667.5675)
+texture = ExtResource("10_4w45t")
