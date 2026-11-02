@@ -17,32 +17,30 @@ script = ExtResource("1_krnsv")
 [node name="tree_base" type="Sprite2D" parent="." unique_id=1185039886]
 texture = ExtResource("2_mac5r")
 
-[node name="tree_parts" type="Node2D" parent="." unique_id=409330448]
-
-[node name="tree_1" type="Sprite2D" parent="tree_parts" unique_id=1339788396]
-position = Vector2(0.24323335, -298.62158)
+[node name="tree_1" type="Sprite2D" parent="." unique_id=1339788396]
+position = Vector2(0.243, -298)
 texture = ExtResource("3_5g01w")
 
-[node name="tree_2" type="Sprite2D" parent="tree_parts" unique_id=319237954]
-position = Vector2(0.24323335, -609.6216)
+[node name="tree_2" type="Sprite2D" parent="." unique_id=319237954]
+position = Vector2(0.243, -609)
 texture = ExtResource("4_c0m52")
 
-[node name="tree_3" type="Sprite2D" parent="tree_parts" unique_id=675053723]
-position = Vector2(0.24323335, -920.6216)
+[node name="tree_3" type="Sprite2D" parent="." unique_id=675053723]
+position = Vector2(0.243, -920)
 texture = ExtResource("5_o7cc1")
 
-[node name="tree_4" type="Sprite2D" parent="tree_parts" unique_id=140108357]
-position = Vector2(0.24323335, -1231.6216)
+[node name="tree_4" type="Sprite2D" parent="." unique_id=140108357]
+position = Vector2(0.243, -1231)
 texture = ExtResource("6_bsxjv")
 
-[node name="tree_5" type="Sprite2D" parent="tree_parts" unique_id=998684268]
-position = Vector2(0.24323335, -1542.6216)
+[node name="tree_5" type="Sprite2D" parent="." unique_id=998684268]
+position = Vector2(0.243, -1542)
 texture = ExtResource("7_xj121")
 
-[node name="tree_6" type="Sprite2D" parent="tree_parts" unique_id=1820104638]
-position = Vector2(0.24323335, -1853.6216)
+[node name="tree_6" type="Sprite2D" parent="." unique_id=1820104638]
+position = Vector2(0.243, -1853)
 texture = ExtResource("8_s2u16")
 
-[node name="tree_7" type="Sprite2D" parent="tree_parts" unique_id=1827711899]
-position = Vector2(0.24323335, -2164.6216)
+[node name="tree_7" type="Sprite2D" parent="." unique_id=1827711899]
+position = Vector2(0.243, -2164)
 texture = ExtResource("9_5wnc7")
