@@ -1,10 +1,13 @@
 extends Node2D 
 
+
 const Config = preload("res://scripts/config.gd")
 
 enum AnimationState {Iddle, Chop, Hit}
 
 var originalPosition: Vector2 = Vector2(0,0)
+
+@export var CURRENT_POSITION := Config.TreeSide.None
 
 func _ready() -> void:
 	originalPosition = position
@@ -24,7 +27,8 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 		position.x = originalPosition.x -200;
 	if playerPosition == Config.TreeSide.Right:
 		position.x = originalPosition.x +200;
-		
+	
+	CURRENT_POSITION = playerPosition
 	emit_signal("current_position_updated")
 	Animate(AnimationState.Chop)
 
