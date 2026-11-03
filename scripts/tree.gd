@@ -1,6 +1,7 @@
 extends Node2D
 
 signal current_position_updated
+
 const Config = preload("res://scripts/config.gd")
 
 const TREE_PART_SIZE: float = 311;
@@ -11,6 +12,8 @@ const BRANCH_X_OFFSET: float = 735.0
 var TREE_PARTS: Array[Sprite2D]
 var CURRENT_BRANCH_INDEX := 0
 var LAST_SIDE := Config.TreeSide.None
+
+@export var CURRENT_POSITION := Config.TreeSide.None
 
 func _ready() -> void:
 	TREE_PARTS = [$tree_1, $tree_2, $tree_3, $tree_4, $tree_5, $tree_6, $tree_7]
@@ -57,7 +60,7 @@ func AddRandomBranchSide():
 		LAST_SIDE = Config.TreeSide.Right
 	else:
 		LAST_SIDE = Config.TreeSide.None
-	
+
 	ShiftCurrentIndex()
 
 func ShiftCurrentIndex():
@@ -65,5 +68,15 @@ func ShiftCurrentIndex():
 	
 	if CURRENT_BRANCH_INDEX >= TREE_PARTS.size():
 		CURRENT_BRANCH_INDEX = 0
+	
+	CURRENT_POSITION = GetCurrentPosition()
+
+func GetCurrentPosition() -> Config.TreeSide:
+	if TREE_PARTS[CURRENT_BRANCH_INDEX].get_child_count() > 0:
+		if TREE_PARTS[CURRENT_BRANCH_INDEX].get_children()[0].position.x > 0:
+			return Config.TreeSide.Right
+		else:
+			return Config.TreeSide.Left
+	return Config.TreeSide.None
 
 # Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
