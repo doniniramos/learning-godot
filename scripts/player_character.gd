@@ -25,6 +25,7 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 	if playerPosition == Config.TreeSide.Right:
 		position.x = originalPosition.x +200;
 		
+	emit_signal("current_position_updated")
 	Animate(AnimationState.Chop)
 
 # Animate (Idle, Chop, Hit)

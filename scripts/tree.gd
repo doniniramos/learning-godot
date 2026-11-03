@@ -1,5 +1,6 @@
 extends Node2D
 
+signal current_position_updated
 const Config = preload("res://scripts/config.gd")
 
 const TREE_PART_SIZE: float = 311;
