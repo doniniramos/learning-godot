@@ -70,6 +70,7 @@ func ShiftCurrentIndex():
 		CURRENT_BRANCH_INDEX = 0
 	
 	CURRENT_POSITION = GetCurrentPosition()
+	emit_signal("current_position_updated")
 
 func GetCurrentPosition() -> Config.TreeSide:
 	if TREE_PARTS[CURRENT_BRANCH_INDEX].get_child_count() > 0:
