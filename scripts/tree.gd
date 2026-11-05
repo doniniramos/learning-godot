@@ -4,10 +4,9 @@ signal current_position_updated
 
 const Config = preload("res://scripts/config.gd")
 
+const BRANCH_X_OFFSET: float = 735.0
 const TREE_PART_SIZE: float = 311;
 const TREE_POSITION_ARRAY: Array[float] = [-298, -609, -920, -1231, -1542, -1853, -2164]
-
-const BRANCH_X_OFFSET: float = 735.0
 
 var TREE_PARTS: Array[Sprite2D]
 var CURRENT_BRANCH_INDEX := 0
@@ -48,16 +47,18 @@ func AddRandomBranchSide():
 	
 	if (rest == 0 and LAST_SIDE != Config.TreeSide.Left): # Left
 		var branch := Sprite2D.new()
-		branch.texture = load("res://assets/branches/branch_left_1.png")
+		branch.texture = load("res://assets/branches/branch_left_1.png") # Randomizar imagens
 		branch.position = Vector2(-BRANCH_X_OFFSET, 0)
 		TREE_PARTS[CURRENT_BRANCH_INDEX].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Left
+		
 	elif (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right		
 		var branch := Sprite2D.new()
-		branch.texture = load("res://assets/branches/branch_right_1.png")
+		branch.texture = load("res://assets/branches/branch_right_1.png") # Randomizar imagens
 		branch.position = Vector2(BRANCH_X_OFFSET, 0)
 		TREE_PARTS[CURRENT_BRANCH_INDEX].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Right
+		
 	else:
 		LAST_SIDE = Config.TreeSide.None
 

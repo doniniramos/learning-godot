@@ -28,7 +28,6 @@ func IsOnSameSide():
 		
 	if N_Tree.CURRENT_POSITION == N_PlayerCharacter.CURRENT_POSITION:
 		SCORE-=1
-		print(SCORE)
 		emit_signal('player_got_hit')
 		
 	PlayerUpdated = false
