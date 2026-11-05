@@ -32,3 +32,7 @@ func IsOnSameSide():
 		
 	PlayerUpdated = false
 	TreeUpdated = false
+
+
+func _on_hud_player_is_dead() -> void:
+	get_tree().reload_current_scene()

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6pwotuijw7jw"]
 
 [ext_resource type="PackedScene" uid="uid://dsk3n8uka5gah" path="res://scenes/health_indicator.tscn" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://bu7yv12ur0c01" path="res://scripts/hud.gd" id="1_oo0fn"]
 
 [node name="HUD" type="Control" unique_id=417816807]
 layout_mode = 3
@@ -11,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_oo0fn")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2093979611]
 layout_mode = 1
@@ -26,3 +28,6 @@ theme_override_constants/margin_bottom = 80
 
 [node name="HealthIndicator" parent="MarginContainer" unique_id=1848978015 instance=ExtResource("1_ahhtf")]
 layout_mode = 2
+
+[connection signal="player_got_hit" from="." to="MarginContainer/HealthIndicator" method="_on_hud_player_got_hit"]
+[connection signal="player_is_dead" from="MarginContainer/HealthIndicator" to="." method="_on_health_indicator_player_is_dead"]
