@@ -1,0 +1,35 @@
+extends Control
+
+@onready var HEARTS_ARRAY: Array[Control] = [$HBoxContainer/Heart01, $HBoxContainer/Heart02, $HBoxContainer/Heart03]
+
+signal player_is_dead
+
+const HEALTH_LIMIT := 3
+
+var HEALTH := 3
+
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed('DebugF'):
+		#DecreaseHealth()
+	#if Input.is_action_just_pressed('DebugJ'):
+		#IncreaseHealth()
+
+func IncreaseHealth():
+	HEALTH += 1
+	if HEALTH > HEALTH_LIMIT:
+		HEALTH = HEALTH_LIMIT
+	UpdateVisuals()
+
+func DecreaseHealth():
+	HEALTH -= 1
+	if HEALTH <= 0:
+		HEALTH = 0		
+		emit_signal("player_is_dead")
+	UpdateVisuals()
+
+func UpdateVisuals():
+	for i in HEARTS_ARRAY.size():
+		if i+1 > HEALTH:
+			HEARTS_ARRAY[i].hide()
+		else:
+			HEARTS_ARRAY[i].show()

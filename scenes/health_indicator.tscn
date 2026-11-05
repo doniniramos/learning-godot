@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dsk3n8uka5gah"]
+
+[ext_resource type="Script" uid="uid://bmmivqym6n4ty" path="res://scripts/health_indicator.gd" id="1_0nxux"]
+[ext_resource type="Texture2D" uid="uid://t2xam342g6b4" path="res://assets/ui/heart.png" id="2_iqnyi"]
+
+[node name="HealthIndicator" type="Control" unique_id=1419995042]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+layout_direction = 3
+script = ExtResource("1_0nxux")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2113487272]
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -10.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+layout_direction = 2
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="Heart01" type="Control" parent="HBoxContainer" unique_id=2005883402]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Heart01" unique_id=1552333693]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_iqnyi")
+
+[node name="Heart02" type="Control" parent="HBoxContainer" unique_id=2050978984]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Heart02" unique_id=1321665204]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_iqnyi")
+
+[node name="Heart03" type="Control" parent="HBoxContainer" unique_id=851509673]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Heart03" unique_id=73148445]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_iqnyi")
