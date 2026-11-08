@@ -9,10 +9,9 @@ const TREE_PART_SIZE: float = 311;
 const TREE_POSITION_ARRAY: Array[float] = [-298, -609, -920, -1231, -1542, -1853, -2164]
 
 var TREE_PARTS: Array[Sprite2D]
-var CURRENT_BRANCH_INDEX := 0
 var LAST_SIDE := Config.TreeSide.None
+@export var CURRENT_POSITION := LAST_SIDE
 
-@export var CURRENT_POSITION := Config.TreeSide.None
 
 func _ready() -> void:
 	TREE_PARTS = [$tree_1, $tree_2, $tree_3, $tree_4, $tree_5, $tree_6, $tree_7]
@@ -21,26 +20,31 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("CutLeft", true) or Input.is_action_just_pressed("CutRight", true):
 		MoveAllLogsDown()
-		AddRandomBranchSide()
 	
 # All logs down :: Drops all logs one level
 func MoveAllLogsDown():
-	for treePart in TREE_PARTS:
-		if (treePart.position.y + TREE_PART_SIZE > 0):
-			treePart.position.y = TREE_POSITION_ARRAY.back()
-			if treePart.get_child_count() > 0:
-				var branches := treePart.get_children()
+	var tween = get_tree().create_tween()
+	for i in 7:
+		if (TREE_PARTS[i].position.y + TREE_PART_SIZE > 0):
+			TREE_PARTS[i].position.y = TREE_POSITION_ARRAY.back()
+			if TREE_PARTS[i].get_child_count() > 0:
+				var branches := TREE_PARTS[i].get_children()
 				for branch in branches:
 					branch.free()
 		else:
-			treePart.position.y = treePart.position.y + TREE_PART_SIZE
+			tween.tween_property(TREE_PARTS[i], "position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.1).set_trans(Tween.TRANS_SPRING)
+			if (i == 1):
+				tween.tween_callback(func(): EmitNewPosition())
+	
+	AddRandomBranchSide(TREE_PARTS.size()-1)
+	RelocateTreePartInArray()
 
 # Generate Random Branch: Generates a random log at the top
 func GenerateBranchesSideArray():
-	for i in 7:
-		AddRandomBranchSide()
+	for i in range(2, 7, 1):
+		AddRandomBranchSide(i)
 	
-func AddRandomBranchSide():
+func AddRandomBranchSide(index: int):
 	var randomGenerator := RandomNumberGenerator.new()
 	var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
 	var rest := tempFloat % 3
@@ -49,36 +53,31 @@ func AddRandomBranchSide():
 		var branch := Sprite2D.new()
 		branch.texture = load("res://assets/branches/branch_left_1.png") # Randomizar imagens
 		branch.position = Vector2(-BRANCH_X_OFFSET, 0)
-		TREE_PARTS[CURRENT_BRANCH_INDEX].add_child(branch)
-		LAST_SIDE = Config.TreeSide.Left
-		
-	elif (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right		
+		TREE_PARTS[index].add_child(branch)
+		LAST_SIDE = Config.TreeSide.Left		
+	
+	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right	
 		var branch := Sprite2D.new()
 		branch.texture = load("res://assets/branches/branch_right_1.png") # Randomizar imagens
 		branch.position = Vector2(BRANCH_X_OFFSET, 0)
-		TREE_PARTS[CURRENT_BRANCH_INDEX].add_child(branch)
+		TREE_PARTS[index].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Right
-		
-	else:
-		LAST_SIDE = Config.TreeSide.None
 
-	ShiftCurrentIndex()
-
-func ShiftCurrentIndex():
-	CURRENT_BRANCH_INDEX += 1
+func RelocateTreePartInArray():
+	var temp:Sprite2D = TREE_PARTS[0]
 	
-	if CURRENT_BRANCH_INDEX >= TREE_PARTS.size():
-		CURRENT_BRANCH_INDEX = 0
+	TREE_PARTS.remove_at(0)
+	TREE_PARTS.append(temp)
 	
-	CURRENT_POSITION = GetCurrentPosition()
-	emit_signal("current_position_updated")
-
-func GetCurrentPosition() -> Config.TreeSide:
-	if TREE_PARTS[CURRENT_BRANCH_INDEX].get_child_count() > 0:
-		if TREE_PARTS[CURRENT_BRANCH_INDEX].get_children()[0].position.x > 0:
-			return Config.TreeSide.Right
+func EmitNewPosition():
+	CURRENT_POSITION = Config.TreeSide.None
+	
+	if TREE_PARTS[0].get_child_count() > 0:
+		if TREE_PARTS[0].get_children()[0].position.x > 0:
+			CURRENT_POSITION = Config.TreeSide.Right
 		else:
-			return Config.TreeSide.Left
-	return Config.TreeSide.None
+			CURRENT_POSITION = Config.TreeSide.Left
+	
+	emit_signal("current_position_updated")
 
 # Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
