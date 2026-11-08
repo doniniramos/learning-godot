@@ -34,3 +34,8 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 # Animate (Idle, Chop, Hit)
 func Animate(state: Config.AnimationState):
 	pass
+
+func _on_main_scene_player_got_hit() -> void:
+	if get_tree():
+		await get_tree().create_timer(0.25).timeout
+		get_tree().paused = false

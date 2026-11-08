@@ -12,6 +12,19 @@ var TreeUpdated := false
 
 var SCORE := 3
 
+func IsOnSameSide():
+	if N_Tree == null or N_PlayerCharacter == null:
+		return
+		
+	if N_Tree.CURRENT_POSITION == N_PlayerCharacter.CURRENT_POSITION:
+		SCORE-=1
+		emit_signal('player_got_hit')
+		if get_tree():
+			get_tree().paused = true
+		
+	PlayerUpdated = false
+	TreeUpdated = false
+
 func _on_player_character_current_position_updated() -> void:
 	PlayerUpdated = true
 	if TreeUpdated:
@@ -21,18 +34,6 @@ func _on_tree_current_position_updated() -> void:
 	TreeUpdated = true
 	if PlayerUpdated:
 		IsOnSameSide()
-
-func IsOnSameSide():
-	if N_Tree == null or N_PlayerCharacter == null:
-		return
-		
-	if N_Tree.CURRENT_POSITION == N_PlayerCharacter.CURRENT_POSITION:
-		SCORE-=1
-		emit_signal('player_got_hit')
-		
-	PlayerUpdated = false
-	TreeUpdated = false
-
 
 func _on_hud_player_is_dead() -> void:
 	get_tree().reload_current_scene()

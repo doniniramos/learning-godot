@@ -5,14 +5,7 @@ extends Control
 signal player_is_dead
 
 const HEALTH_LIMIT := 3
-
 var HEALTH := 3
-
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed('DebugF'):
-		#DecreaseHealth()
-	#if Input.is_action_just_pressed('DebugJ'):
-		#IncreaseHealth()
 
 func IncreaseHealth():
 	HEALTH += 1
