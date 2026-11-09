@@ -2,7 +2,7 @@ extends Node2D
 
 const Config = preload("res://scripts/config.gd")
 
-signal current_position_updated
+signal player_got_hit
 
 @export var CURRENT_POSITION := Config.TreeSide.None
 
@@ -28,14 +28,14 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 		position.x = originalPosition.x +200;
 	
 	CURRENT_POSITION = playerPosition
-	emit_signal("current_position_updated")
 	Animate(Config.AnimationState.Chop)
 
 # Animate (Idle, Chop, Hit)
 func Animate(state: Config.AnimationState):
 	pass
 
-func _on_main_scene_player_got_hit() -> void:
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	emit_signal('player_got_hit')
 	if get_tree():
 		await get_tree().create_timer(0.25).timeout
 		get_tree().paused = false

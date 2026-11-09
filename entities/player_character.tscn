@@ -101,11 +101,22 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgflt"]
+size = Vector2(481.0811, 894.5946)
+
 [node name="PlayerCharacter" type="Node2D" unique_id=1709040866]
 scale = Vector2(0.37, 0.37)
 script = ExtResource("1_yqde8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1713956342]
 sprite_frames = SubResource("SpriteFrames_kgflt")
-animation = &"Idle"
-frame_progress = 0.34786955
+animation = &"Walk"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=807902788]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=617291886]
+position = Vector2(0, 1.3513565)
+shape = SubResource("RectangleShape2D_kgflt")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

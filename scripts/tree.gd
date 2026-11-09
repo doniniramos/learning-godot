@@ -3,6 +3,7 @@ extends Node2D
 signal current_position_updated
 
 const Config = preload("res://scripts/config.gd")
+const Branch = preload("res://entities/branch.tscn")
 
 const BRANCH_X_OFFSET: float = 735.0
 const TREE_PART_SIZE: float = 311;
@@ -33,11 +34,11 @@ func MoveAllLogsDown():
 					branch.free()
 		else:
 			tween.tween_property(TREE_PARTS[i], "position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.1).set_trans(Tween.TRANS_SPRING)
-			if (i == 1):
-				tween.tween_callback(func(): EmitNewPosition())
+			#if (i == 1):
+				#tween.tween_callback(func(): EmitNewPosition())
 	
-	AddRandomBranchSide(TREE_PARTS.size()-1)
 	RelocateTreePartInArray()
+	AddRandomBranchSide(TREE_PARTS.size()-1)
 
 # Generate Random Branch: Generates a random log at the top
 func GenerateBranchesSideArray():
@@ -50,16 +51,16 @@ func AddRandomBranchSide(index: int):
 	var rest := tempFloat % 3
 	
 	if (rest == 0 and LAST_SIDE != Config.TreeSide.Left): # Left
-		var branch := Sprite2D.new()
-		branch.texture = load("res://assets/branches/branch_left_1.png") # Randomizar imagens
-		branch.position = Vector2(-BRANCH_X_OFFSET, 0)
+		var branch = Branch.instantiate()
+		branch.BranchSide = Config.TreeSide.Left
+		branch.position = Vector2(-branch.get_node("Sprite2D").texture.get_size().x*0.88, 0)
 		TREE_PARTS[index].add_child(branch)
-		LAST_SIDE = Config.TreeSide.Left		
+		LAST_SIDE = Config.TreeSide.Left
 	
-	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right	
-		var branch := Sprite2D.new()
-		branch.texture = load("res://assets/branches/branch_right_1.png") # Randomizar imagens
-		branch.position = Vector2(BRANCH_X_OFFSET, 0)
+	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right		
+		var branch = Branch.instantiate()
+		branch.BranchSide = Config.TreeSide.Right
+		branch.position = Vector2(branch.get_node("Sprite2D").texture.get_size().x*0.88, 0)
 		TREE_PARTS[index].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Right
 

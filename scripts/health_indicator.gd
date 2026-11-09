@@ -27,6 +27,5 @@ func UpdateVisuals():
 		else:
 			HEARTS_ARRAY[i].show()
 
-
 func _on_hud_player_got_hit() -> void:
 	DecreaseHealth()
