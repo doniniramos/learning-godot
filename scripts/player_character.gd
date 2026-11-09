@@ -35,6 +35,7 @@ func Animate(state: Config.AnimationState):
 	pass
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	Animate(Config.AnimationState.Hit)
 	emit_signal('player_got_hit')
 	if get_tree():
 		await get_tree().create_timer(0.25).timeout

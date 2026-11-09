@@ -5,9 +5,6 @@ const Config = preload("res://scripts/config.gd")
 @onready var N_PlayerCharacter:Node2D = get_node("PlayerCharacter")
 @onready var N_Tree:Node2D = get_node("N_ActionLayer/Tree")
 
-var PlayerUpdated := false
-var TreeUpdated := false
-
 var SCORE := 3
 
 func _on_hud_player_is_dead() -> void:

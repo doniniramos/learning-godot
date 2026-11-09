@@ -5,7 +5,6 @@ signal current_position_updated
 const Config = preload("res://scripts/config.gd")
 const Branch = preload("res://entities/branch.tscn")
 
-const BRANCH_X_OFFSET: float = 735.0
 const TREE_PART_SIZE: float = 311;
 const TREE_POSITION_ARRAY: Array[float] = [-298, -609, -920, -1231, -1542, -1853, -2164]
 
@@ -34,8 +33,6 @@ func MoveAllLogsDown():
 					branch.free()
 		else:
 			tween.tween_property(TREE_PARTS[i], "position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.1).set_trans(Tween.TRANS_SPRING)
-			#if (i == 1):
-				#tween.tween_callback(func(): EmitNewPosition())
 	
 	RelocateTreePartInArray()
 	AddRandomBranchSide(TREE_PARTS.size()-1)
@@ -45,6 +42,7 @@ func GenerateBranchesSideArray():
 	for i in range(2, 7, 1):
 		AddRandomBranchSide(i)
 	
+# Attach Random Branch to Tree
 func AddRandomBranchSide(index: int):
 	var randomGenerator := RandomNumberGenerator.new()
 	var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
@@ -69,16 +67,5 @@ func RelocateTreePartInArray():
 	
 	TREE_PARTS.remove_at(0)
 	TREE_PARTS.append(temp)
-	
-func EmitNewPosition():
-	CURRENT_POSITION = Config.TreeSide.None
-	
-	if TREE_PARTS[0].get_child_count() > 0:
-		if TREE_PARTS[0].get_children()[0].position.x > 0:
-			CURRENT_POSITION = Config.TreeSide.Right
-		else:
-			CURRENT_POSITION = Config.TreeSide.Left
-	
-	emit_signal("current_position_updated")
 
 # Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc

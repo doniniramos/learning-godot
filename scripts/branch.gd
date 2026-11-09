@@ -21,6 +21,3 @@ func _ready() -> void:
 		$Sprite2D.texture = branchTexture
 	
 	$CollisionShape2D.shape.set("size", Vector2($Sprite2D.texture.get_size().x, 125.0))
-
-func GetBranchSize() -> float:
-	return $Sprite2D.texture.get_size().x
