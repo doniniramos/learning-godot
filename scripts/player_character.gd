@@ -27,7 +27,6 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 	if playerPosition == Config.TreeSide.Right:
 		position.x = originalPosition.x +200;
 	
-	CURRENT_POSITION = playerPosition
 	Animate(Config.AnimationState.Chop)
 
 # Animate (Idle, Chop, Hit)
@@ -35,6 +34,7 @@ func Animate(state: Config.AnimationState):
 	pass
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	area.process_mode = Node.PROCESS_MODE_DISABLED
 	Animate(Config.AnimationState.Hit)
 	emit_signal('player_got_hit')
 	if get_tree():
