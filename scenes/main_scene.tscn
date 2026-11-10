@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://dbt75uhgiipjo" path="res://scripts/main_scene.gd" id="1_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://dout0c1t4g4l" path="res://assets/background/background_farest.png" id="1_gubc5"]
 [ext_resource type="PackedScene" uid="uid://ct0v1fkfdtsb2" path="res://entities/player_character.tscn" id="1_w2twt"]
-[ext_resource type="Texture2D" uid="uid://cium2wkdnep1e" path="res://assets/background/background_grass.png" id="2_rt2n2"]
+[ext_resource type="Texture2D" uid="uid://cium2wkdnep1e" path="res://assets/background/background_grass_front.png" id="2_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://de7rxa1sqfv6h" path="res://assets/background/background_far_left.png" id="3_c16ls"]
 [ext_resource type="Texture2D" uid="uid://wxovfhyhtdkr" path="res://assets/background/background_far_right.png" id="4_18nlu"]
+[ext_resource type="Texture2D" uid="uid://45q0tlyo08uk" path="res://assets/background/background_grass_back.png" id="5_4w45t"]
 [ext_resource type="PackedScene" uid="uid://s1xhpywv7fq3" path="res://entities/tree.tscn" id="5_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://cksoxgthpuadp" path="res://assets/foreground/foreground_left_top.png" id="7_6wevv"]
 [ext_resource type="Texture2D" uid="uid://b1hr78tbbvpar" path="res://assets/foreground/foreground_left_bottom.png" id="8_e1cbu"]
@@ -17,23 +18,20 @@
 script = ExtResource("1_e1cbu")
 
 [node name="N_Background" type="Node2D" parent="." unique_id=1508422960]
-position = Vector2(640, 267)
-scale = Vector2(0.37, 0.37)
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
 
 [node name="S_BackgroundFarest" type="Sprite2D" parent="N_Background" unique_id=1313447523]
 texture = ExtResource("1_gubc5")
 
 [node name="S_TreesLeft" type="Sprite2D" parent="N_Background" unique_id=660805911]
-position = Vector2(-1037.8379, -151.35135)
 texture = ExtResource("3_c16ls")
 
 [node name="S_TreesRight" type="Sprite2D" parent="N_Background" unique_id=109403525]
-position = Vector2(1024.3243, -100)
 texture = ExtResource("4_18nlu")
 
-[node name="S_BackgroundGrass" type="Sprite2D" parent="N_Background" unique_id=2133899565]
-position = Vector2(0, 620)
-texture = ExtResource("2_rt2n2")
+[node name="S_BackgroundGrassBack" type="Sprite2D" parent="N_Background" unique_id=1344482740]
+texture = ExtResource("5_4w45t")
 
 [node name="N_ActionLayer" type="Node2D" parent="." unique_id=1306367297]
 position = Vector2(640, 267)
@@ -41,28 +39,29 @@ position = Vector2(640, 267)
 [node name="Tree" parent="N_ActionLayer" unique_id=1174151102 instance=ExtResource("5_rt2n2")]
 position = Vector2(23, 315)
 
+[node name="S_BackgroundGrassFront" type="Sprite2D" parent="N_ActionLayer" unique_id=2133899565]
+position = Vector2(0, 93)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rt2n2")
+
 [node name="PlayerCharacter" parent="." unique_id=1709040866 instance=ExtResource("1_w2twt")]
 position = Vector2(660, 543)
 scale = Vector2(0.2, 0.2)
 
 [node name="N_Foreground" type="Node2D" parent="." unique_id=2143932076]
-position = Vector2(0, -44)
-scale = Vector2(0.37, 0.37)
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
 
 [node name="S_ForegroundLeftTop" type="Sprite2D" parent="N_Foreground" unique_id=1937235257]
-position = Vector2(548.6487, 445.94595)
 texture = ExtResource("7_6wevv")
 
 [node name="S_ForegroundLeftBottom" type="Sprite2D" parent="N_Foreground" unique_id=315318741]
-position = Vector2(704.1622, 1743.8109)
 texture = ExtResource("8_e1cbu")
 
 [node name="S_ForegroundRightTop" type="Sprite2D" parent="N_Foreground" unique_id=956015037]
-position = Vector2(3070.2703, 729.72974)
 texture = ExtResource("9_mngbo")
 
 [node name="S_ForegroundRightBottom" type="Sprite2D" parent="N_Foreground" unique_id=2142539146]
-position = Vector2(3021.6216, 1667.5675)
 texture = ExtResource("10_4w45t")
 
 [node name="HUD" parent="." unique_id=417816807 instance=ExtResource("12_mngbo")]

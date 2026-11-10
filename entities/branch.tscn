@@ -4,13 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://dkunq80pen4b0" path="res://assets/branches/branch_left_3.png" id="2_egs8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgflt"]
-size = Vector2(660, 125)
+size = Vector2(700, 130.5)
 
 [node name="Branch" type="Area2D" unique_id=1728898519]
 script = ExtResource("1_1iv1e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2012018895]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_egs8p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=639077447]
+position = Vector2(0, 2.75)
 shape = SubResource("RectangleShape2D_kgflt")

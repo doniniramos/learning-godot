@@ -10,7 +10,7 @@ var originalPosition: Vector2 = Vector2(0,0)
 
 func _ready() -> void:
 	originalPosition = position
-	$AnimatedSprite2D.play("Walk")
+	$AnimatedSprite2D.play("idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
