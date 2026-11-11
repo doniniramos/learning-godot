@@ -18,29 +18,29 @@ script = ExtResource("1_krnsv")
 texture = ExtResource("2_mac5r")
 
 [node name="tree_1" type="Sprite2D" parent="." unique_id=1339788396]
-position = Vector2(0.243, -298)
+position = Vector2(0, -298)
 texture = ExtResource("3_5g01w")
 
 [node name="tree_2" type="Sprite2D" parent="." unique_id=319237954]
-position = Vector2(0.243, -609)
+position = Vector2(0, -609)
 texture = ExtResource("4_c0m52")
 
 [node name="tree_3" type="Sprite2D" parent="." unique_id=675053723]
-position = Vector2(0.243, -920)
+position = Vector2(0, -920)
 texture = ExtResource("5_o7cc1")
 
 [node name="tree_4" type="Sprite2D" parent="." unique_id=140108357]
-position = Vector2(0.243, -1231)
+position = Vector2(0, -1231)
 texture = ExtResource("6_bsxjv")
 
 [node name="tree_5" type="Sprite2D" parent="." unique_id=998684268]
-position = Vector2(0.243, -1542)
+position = Vector2(0, -1542)
 texture = ExtResource("7_xj121")
 
 [node name="tree_6" type="Sprite2D" parent="." unique_id=1820104638]
-position = Vector2(0.243, -1853)
+position = Vector2(0, -1853)
 texture = ExtResource("8_s2u16")
 
 [node name="tree_7" type="Sprite2D" parent="." unique_id=1827711899]
-position = Vector2(0.243, -2164)
+position = Vector2(0, -2164)
 texture = ExtResource("9_5wnc7")
