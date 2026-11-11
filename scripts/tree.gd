@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 # All logs down :: Drops all logs one level
 func MoveAllLogsDown(side: Config.TreeSide):
 	var tween := get_tree().create_tween()
-	for i in 7:
+	for i in TREE_PARTS.size():
 		if (TREE_PARTS[i].position.y + TREE_PART_SIZE > 0):
 			TREE_PARTS[i].position = Vector2(0, TREE_POSITION_ARRAY.back())
 			
@@ -70,7 +70,8 @@ func RelocateTreePartInArray():
 	var temp:Sprite2D = TREE_PARTS[0]
 	
 	TREE_PARTS.remove_at(0)
-	TREE_PARTS.append(temp)
+	if temp != $tree_1:
+		TREE_PARTS.append(temp)
 
 func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
 	const positionCorrection := 20
