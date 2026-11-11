@@ -10,7 +10,7 @@ var originalPosition: Vector2 = Vector2(0,0)
 
 func _ready() -> void:
 	originalPosition = position
-	$AnimatedSprite2D.play("idle")
+	Animate(Config.AnimationState.Iddle)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,7 +31,18 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 
 # Animate (Idle, Chop, Hit)
 func Animate(state: Config.AnimationState):
-	pass
+	if state == Config.AnimationState.Iddle:
+		$AnimatedSprite2D.play("idle")
+	
+	if state == Config.AnimationState.Chop:
+		$AnimatedSprite2D.play("chop")
+		await $AnimatedSprite2D.animation_finished
+		$AnimatedSprite2D.play("idle")
+	
+	if state == Config.AnimationState.Hit:
+		$AnimatedSprite2D.play("hit")
+		await $AnimatedSprite2D.animation_finished
+		$AnimatedSprite2D.play("idle")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
