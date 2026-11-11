@@ -49,22 +49,21 @@ func AddRandomBranchSide(index: int):
 	var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
 	var rest := tempFloat % 3
 	
-	const XOffset := 10.0
-	const ScaleOffset := 0.88
+	var XOffset:float = (TREE_PARTS[index] as Sprite2D).texture.get_size().x / 2 * (TREE_PARTS[index] as Sprite2D).scale.x 
 	
 	if (rest == 0 and LAST_SIDE != Config.TreeSide.Left): # Left
 		var branch = Branch.instantiate()
 		branch.BranchSide = Config.TreeSide.Left
-		branch.position = Vector2(-branch.get_node("Sprite2D").texture.get_size().x*ScaleOffset+XOffset, 0)
-		TREE_PARTS[index].add_child(branch)
+		branch.get_node("Sprite2D").texture_changed.connect(_on_sprite_texture_changed.bind(branch, Config.TreeSide.Left, XOffset))
 		LAST_SIDE = Config.TreeSide.Left
+		TREE_PARTS[index].add_child(branch)
 	
 	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right
 		var branch = Branch.instantiate()
 		branch.BranchSide = Config.TreeSide.Right
-		branch.position = Vector2(branch.get_node("Sprite2D").texture.get_size().x*ScaleOffset+XOffset, 0)
-		TREE_PARTS[index].add_child(branch)
+		branch.get_node("Sprite2D").texture_changed.connect(_on_sprite_texture_changed.bind(branch, Config.TreeSide.Right, XOffset))
 		LAST_SIDE = Config.TreeSide.Right
+		TREE_PARTS[index].add_child(branch)
 
 # Move Tree Part from Start to End of Tree Parts Array
 func RelocateTreePartInArray():
@@ -72,5 +71,17 @@ func RelocateTreePartInArray():
 	
 	TREE_PARTS.remove_at(0)
 	TREE_PARTS.append(temp)
+
+func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
+	const positionCorrection := 20
+	var xPosition := 0.0
+	
+	if (side == Config.TreeSide.Left):
+		xPosition = -XOffset-(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) - positionCorrection
+	
+	if (side == Config.TreeSide.Right):
+		xPosition = XOffset+(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) + positionCorrection
+	
+	branch.position = Vector2(xPosition, 0)
 
 # Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
