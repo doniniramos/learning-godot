@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://crlw425o8j8bj"]
 
 [ext_resource type="Script" uid="uid://bk5i7ht7y4ix2" path="res://scripts/branch.gd" id="1_1iv1e"]
-[ext_resource type="Texture2D" uid="uid://dkunq80pen4b0" path="res://assets/branches/branch_left_3.png" id="2_egs8p"]
+[ext_resource type="Texture2D" uid="uid://l5wd1uaeybc8" path="res://assets/branches/branch_right_4.png" id="2_egs8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgflt"]
-size = Vector2(700, 130.5)
+size = Vector2(632, 130.5)
 
 [node name="Branch" type="Area2D" unique_id=1728898519]
+show_behind_parent = true
 script = ExtResource("1_1iv1e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2012018895]
-scale = Vector2(1.5, 1.5)
+show_behind_parent = true
+scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_egs8p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=639077447]
