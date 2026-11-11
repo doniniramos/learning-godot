@@ -11,10 +11,8 @@ func _on_hud_player_is_dead() -> void:
 	if get_tree():
 		get_tree().paused = false
 		get_tree().reload_current_scene()
-	
 
 func _on_player_character_player_got_hit() -> void:
 	SCORE-=1
-	
 	if get_tree():
 		get_tree().paused = true

@@ -16,7 +16,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("CutLeft", true):
 		MoveToPosition(Config.TreeSide.Left)
-		
 	if Input.is_action_just_pressed("CutRight", true):
 		MoveToPosition(Config.TreeSide.Right)
 

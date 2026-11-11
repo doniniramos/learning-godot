@@ -16,7 +16,7 @@ func IncreaseHealth():
 func DecreaseHealth():
 	HEALTH -= 1
 	if HEALTH <= 0:
-		HEALTH = 0		
+		HEALTH = 0
 		emit_signal("player_is_dead")
 	UpdateVisuals()
 
