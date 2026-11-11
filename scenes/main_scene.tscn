@@ -34,10 +34,10 @@ texture = ExtResource("4_18nlu")
 texture = ExtResource("5_4w45t")
 
 [node name="N_ActionLayer" type="Node2D" parent="." unique_id=1306367297]
-position = Vector2(640, 267)
+position = Vector2(640, 230)
 
 [node name="Tree" parent="N_ActionLayer" unique_id=1174151102 instance=ExtResource("5_rt2n2")]
-position = Vector2(23, 315)
+position = Vector2(0, 315)
 
 [node name="S_BackgroundGrassFront" type="Sprite2D" parent="N_ActionLayer" unique_id=2133899565]
 position = Vector2(0, 93)
@@ -45,7 +45,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_rt2n2")
 
 [node name="PlayerCharacter" parent="." unique_id=1709040866 instance=ExtResource("1_w2twt")]
-position = Vector2(660, 543)
+position = Vector2(640, 543)
 scale = Vector2(0.2, 0.2)
 
 [node name="N_Foreground" type="Node2D" parent="." unique_id=2143932076]
