@@ -10,16 +10,26 @@ const TREE_POSITION_ARRAY: Array[float] = [-298, -609, -920, -1231, -1542, -1853
 
 var TREE_PARTS: Array[Sprite2D]
 var LAST_SIDE := Config.TreeSide.None
+var CanReceiveInput := true
 
 func _ready() -> void:
 	TREE_PARTS = [$tree_1, $tree_2, $tree_3, $tree_4, $tree_5, $tree_6, $tree_7]
 	GenerateBranchesSideArray()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("CutLeft", true):
+	if Input.is_action_just_pressed("CutLeft", true) and CanReceiveInput:
 		MoveAllLogsDown(Config.TreeSide.Left)
-	if Input.is_action_just_pressed("CutRight", true):
+		CanReceiveInput = false
+		ResetInputCooldown()
+	if Input.is_action_just_pressed("CutRight", true) and CanReceiveInput:
 		MoveAllLogsDown(Config.TreeSide.Right)
+		CanReceiveInput = false
+		ResetInputCooldown()
+
+func ResetInputCooldown():
+	if get_tree():
+		await get_tree().create_timer(Config.INPUT_COOLDOWN_TIME).timeout
+		CanReceiveInput = true
 	
 # All logs down :: Drops all logs one level
 func MoveAllLogsDown(side: Config.TreeSide):

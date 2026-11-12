@@ -7,6 +7,7 @@ signal player_got_hit
 @export var CURRENT_POSITION := Config.TreeSide.None
 
 var originalPosition: Vector2 = Vector2(0,0)
+var CanReceiveInput := true
 
 func _ready() -> void:
 	originalPosition = position
@@ -14,10 +15,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("CutLeft", true):
+	if Input.is_action_just_pressed("CutLeft", true) and CanReceiveInput:
 		MoveToPosition(Config.TreeSide.Left)
-	if Input.is_action_just_pressed("CutRight", true):
+		CanReceiveInput = false
+		ResetInputCooldown()
+	if Input.is_action_just_pressed("CutRight", true) and CanReceiveInput:
 		MoveToPosition(Config.TreeSide.Right)
+		CanReceiveInput = false
+		ResetInputCooldown()
+
+func ResetInputCooldown():
+	if get_tree():
+		await get_tree().create_timer(Config.INPUT_COOLDOWN_TIME).timeout
+		CanReceiveInput = true
 
 # Move to position (Left, Right)
 func MoveToPosition(playerPosition: Config.TreeSide):
