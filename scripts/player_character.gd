@@ -11,7 +11,7 @@ var CanReceiveInput := true
 
 func _ready() -> void:
 	originalPosition = position
-	Animate(Config.AnimationState.Iddle)
+	Animate(Config.AnimationState.Idle)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,18 +40,16 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 
 # Animate (Idle, Chop, Hit)
 func Animate(state: Config.AnimationState):
-	if state == Config.AnimationState.Iddle:
+	if state == Config.AnimationState.Idle:
 		$AnimatedSprite2D.play("idle")
 	
 	if state == Config.AnimationState.Chop:
 		$AnimatedSprite2D.play("chop")
-		await $AnimatedSprite2D.animation_finished
-		$AnimatedSprite2D.play("idle")
+		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle))
 	
 	if state == Config.AnimationState.Hit:
 		$AnimatedSprite2D.play("hit")
-		await $AnimatedSprite2D.animation_finished
-		$AnimatedSprite2D.play("idle")
+		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle))
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
