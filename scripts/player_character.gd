@@ -44,6 +44,9 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 func Animate(state: Config.AnimationState, side: Config.TreeSide):
 	if state == Config.AnimationState.Idle:
 		$AnimatedSprite2D.play("idle")
+		
+	if state == Config.AnimationState.Dead:
+		$AnimatedSprite2D.play("dead")
 	
 	if state == Config.AnimationState.Chop:
 		$AnimatedSprite2D.play("chop")
@@ -61,3 +64,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if get_tree():
 		await get_tree().create_timer(0.25).timeout
 		get_tree().paused = false
+
+
+func _on_hud_player_is_dead() -> void:
+	if position.x > 640:
+		position.x = position.x + 110
+	else:
+		position.x = position.x - 110
+	
+	position.y = 545.0
+		
+	Animate(Config.AnimationState.Dead, Config.TreeSide.None)
