@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdvx0wdwq7435" path="res://assets/ui/home.png" id="1_ekxnf"]
 [ext_resource type="Script" uid="uid://ub6s7u0jby14" path="res://scripts/main_menu.gd" id="1_oa1go"]
 [ext_resource type="Texture2D" uid="uid://0m66xh2fv6y0" path="res://assets/ui/home_hover.png" id="2_bqqt6"]
-[ext_resource type="FontFile" uid="uid://c2o3w8s8ayd5v" path="res://assets/fonts/BubblegumSans-Regular.ttf" id="2_rtw2f"]
+[ext_resource type="FontFile" uid="uid://c2o3w8s8ayd5v" path="res://assets/fonts/bubblegum_sans_regular.ttf" id="2_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://sukhbxitb48g" path="res://assets/ui/play.png" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://bfpe4rkmqkg4r" path="res://assets/ui/play_hover.png" id="4_8ln24"]
 

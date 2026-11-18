@@ -16,6 +16,7 @@ func _on_hud_player_is_dead() -> void:
 		$HUD/MainMenu.visible = true
 		get_tree().paused = true
 
+
 func _on_player_character_player_got_hit() -> void:
 	SCORE-=1
 	if get_tree():

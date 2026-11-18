@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c2o3w8s8ayd5v"
-path="res://.godot/imported/BubblegumSans-Regular.ttf-cbae224f1be0bb5fe97642fcbf041f51.fontdata"
+path="res://.godot/imported/bubblegum_sans_regular.ttf-6c4fa43db9bff00c8735f2d9967da5d2.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/BubblegumSans-Regular.ttf"
-dest_files=["res://.godot/imported/BubblegumSans-Regular.ttf-cbae224f1be0bb5fe97642fcbf041f51.fontdata"]
+source_file="res://assets/fonts/bubblegum_sans_regular.ttf"
+dest_files=["res://.godot/imported/bubblegum_sans_regular.ttf-6c4fa43db9bff00c8735f2d9967da5d2.fontdata"]
 
 [params]
 
