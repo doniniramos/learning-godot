@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://du83avwts7ud5" path="res://assets/foreground/foreground_right_top.png" id="9_mngbo"]
 [ext_resource type="Texture2D" uid="uid://ct33xvnrjb0q6" path="res://assets/foreground/foreground_right_bottom.png" id="10_4w45t"]
 [ext_resource type="PackedScene" uid="uid://c6pwotuijw7jw" path="res://scenes/hud.tscn" id="12_mngbo"]
+[ext_resource type="PackedScene" uid="uid://xklia34h0ksb" path="res://scenes/main_menu.tscn" id="14_r6p65"]
 
 [node name="MainScene" type="Node2D" unique_id=794196069]
 script = ExtResource("1_e1cbu")
@@ -68,8 +69,14 @@ texture = ExtResource("10_4w45t")
 offset_right = 1280.0
 offset_bottom = 720.0
 
+[node name="MainMenu" parent="HUD" unique_id=387665731 instance=ExtResource("14_r6p65")]
+visible = false
+layout_mode = 1
+
 [connection signal="current_position_updated" from="N_ActionLayer/Tree" to="." method="_on_tree_current_position_updated"]
 [connection signal="player_got_hit" from="PlayerCharacter" to="." method="_on_player_character_player_got_hit"]
 [connection signal="player_got_hit" from="PlayerCharacter" to="HUD" method="_on_player_character_player_got_hit"]
 [connection signal="player_is_dead" from="HUD" to="." method="_on_hud_player_is_dead"]
 [connection signal="player_is_dead" from="HUD" to="PlayerCharacter" method="_on_hud_player_is_dead"]
+[connection signal="HomeButtonPressed" from="HUD/MainMenu" to="." method="_on_main_menu_home_button_pressed"]
+[connection signal="PlayButtonPressed" from="HUD/MainMenu" to="." method="_on_main_menu_play_button_pressed"]
