@@ -11,7 +11,7 @@ var CanReceiveInput := true
 
 func _ready() -> void:
 	originalPosition = position
-	Animate(Config.AnimationState.Idle)
+	Animate(Config.AnimationState.Idle, Config.TreeSide.None)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,28 +32,31 @@ func ResetInputCooldown():
 # Move to position (Left, Right)
 func MoveToPosition(playerPosition: Config.TreeSide):
 	if playerPosition == Config.TreeSide.Left:
-		position.x = originalPosition.x -200;
+		position.x = originalPosition.x -210;
 	if playerPosition == Config.TreeSide.Right:
-		position.x = originalPosition.x +200;
+		position.x = originalPosition.x +210;
+	if position.y != 500:
+		position.y = 500
 	
-	Animate(Config.AnimationState.Chop)
+	Animate(Config.AnimationState.Chop, playerPosition)
 
 # Animate (Idle, Chop, Hit)
-func Animate(state: Config.AnimationState):
+func Animate(state: Config.AnimationState, side: Config.TreeSide):
 	if state == Config.AnimationState.Idle:
 		$AnimatedSprite2D.play("idle")
 	
 	if state == Config.AnimationState.Chop:
 		$AnimatedSprite2D.play("chop")
-		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle))
+		$AnimatedSprite2D.flip_h = side == Config.TreeSide.Left
+		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
 	
 	if state == Config.AnimationState.Hit:
 		$AnimatedSprite2D.play("hit")
-		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle))
+		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
-	Animate(Config.AnimationState.Hit)
+	Animate(Config.AnimationState.Hit, Config.TreeSide.None)
 	emit_signal('player_got_hit')
 	if get_tree():
 		await get_tree().create_timer(0.25).timeout
