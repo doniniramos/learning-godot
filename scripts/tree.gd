@@ -50,7 +50,7 @@ func MoveAllLogsDown(side: Config.TreeSide):
 
 # Generate Random Branch: Generates a random log at the top
 func GenerateBranchesSideArray():
-	for i in range(2, 7, 1):
+	for i in range(2, 7, 2):
 		AddRandomBranchSide(i)
 	
 # Attach Random Branch to Tree
