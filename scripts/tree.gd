@@ -45,8 +45,8 @@ func MoveAllLogsDown(side: Config.TreeSide):
 		else:
 			tween.tween_property(TREE_PARTS[i],"position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.05).set_trans(Tween.TRANS_SPRING)
 
-	AddRandomBranchSide(TREE_PARTS.size()-1)
 	RelocateTreePartInArray()
+	AddRandomBranchSide(TREE_PARTS.size()-1)
 
 # Generate Random Branch: Generates a random log at the top
 func GenerateBranchesSideArray():

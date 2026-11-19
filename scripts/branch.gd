@@ -16,7 +16,7 @@ func _ready() -> void:
 		var branchTexture: Texture2D = load("res://assets/branches/branch_left_%s.png"%Rest)
 		$Sprite2D.texture = branchTexture
 	
-	if BranchSide == Config.TreeSide.Right:
+	elif BranchSide == Config.TreeSide.Right:
 		var branchTexture: Texture2D = load("res://assets/branches/branch_right_%s.png"%Rest)
 		$Sprite2D.texture = branchTexture
 	
