@@ -55,6 +55,7 @@ func GenerateBranchesSideArray():
 	
 # Attach Random Branch to Tree
 func AddRandomBranchSide(index: int):
+	var hasAddedABranch := false
 	var randomGenerator := RandomNumberGenerator.new()
 	var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
 	var rest := tempFloat % 3
@@ -62,18 +63,19 @@ func AddRandomBranchSide(index: int):
 	var XOffset:float = (TREE_PARTS[index] as Sprite2D).texture.get_size().x / 2 * (TREE_PARTS[index] as Sprite2D).scale.x 
 	
 	if (rest == 0 and LAST_SIDE != Config.TreeSide.Left): # Left
+		hasAddedABranch = true
 		var branch = Branch.instantiate()
 		branch.BranchSide = Config.TreeSide.Left
 		branch.get_node("Sprite2D").texture_changed.connect(_on_sprite_texture_changed.bind(branch, Config.TreeSide.Left, XOffset))
-		LAST_SIDE = Config.TreeSide.Left
 		TREE_PARTS[index].add_child(branch)
+		LAST_SIDE = Config.TreeSide.Left
 	
-	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right): # Right
+	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right and !hasAddedABranch): # Right
 		var branch = Branch.instantiate()
 		branch.BranchSide = Config.TreeSide.Right
 		branch.get_node("Sprite2D").texture_changed.connect(_on_sprite_texture_changed.bind(branch, Config.TreeSide.Right, XOffset))
-		LAST_SIDE = Config.TreeSide.Right
 		TREE_PARTS[index].add_child(branch)
+		LAST_SIDE = Config.TreeSide.Right
 
 # Move Tree Part from Start to End of Tree Parts Array
 func RelocateTreePartInArray():
