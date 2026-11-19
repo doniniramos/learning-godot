@@ -12,6 +12,9 @@ var bestScore := 0
 var score := 0
 var canScorePoint := true
 
+func _ready() -> void:
+	load_score()
+
 func _on_player_character_player_got_hit() -> void:
 	canScorePoint = false
 
@@ -38,9 +41,24 @@ func _on_hud_time_ended() -> void:
 func endGame():
 	if score > bestScore:
 		bestScore = score
+		save_score()
 	MainMenu.setBestScore(bestScore)
 	MainMenu.setScore(score)
 	if get_tree():
 		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
 		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
 		$HUD/MainMenu.visible = true
+
+func save_score():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	save_file.store_var(bestScore)
+
+func load_score():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return
+	
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var loadedScore = save_file.get_var()
+	
+	if loadedScore != null:
+		bestScore = int(loadedScore)
