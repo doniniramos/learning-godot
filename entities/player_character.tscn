@@ -159,7 +159,7 @@ script = ExtResource("1_yqde8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1713956342]
 sprite_frames = SubResource("SpriteFrames_qeab4")
-animation = &"chop"
+animation = &"idle"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=807902788]
 
