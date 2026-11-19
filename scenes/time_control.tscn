@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bsydl2qxnknnm" path="res://scripts/time_control.gd" id="1_5iqf6"]
 [ext_resource type="Texture2D" uid="uid://di5a1sjm4xcp7" path="res://assets/ui/timebar_background.png" id="1_g8aip"]
 [ext_resource type="Texture2D" uid="uid://qsor2mak1dou" path="res://assets/ui/timebar_time.png" id="2_5iqf6"]
+[ext_resource type="Texture2D" uid="uid://dcu0mv3irwecf" path="res://assets/ui/timebar_foreground.png" id="3_5iqf6"]
 
 [node name="TimeControl" type="Control" unique_id=700218530]
 layout_mode = 3
@@ -27,5 +28,5 @@ offset_bottom = 310.0
 grow_horizontal = 2
 value = 100.0
 texture_under = ExtResource("1_g8aip")
+texture_over = ExtResource("3_5iqf6")
 texture_progress = ExtResource("2_5iqf6")
-texture_progress_offset = Vector2(60, 68)
