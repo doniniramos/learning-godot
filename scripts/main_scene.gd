@@ -3,11 +3,12 @@ extends Node2D
 signal increase_point(new_value)
 
 const Config = preload("res://scripts/config.gd")
-var MainMenu = preload("res://scenes/main_menu.tscn")
 
+@onready var MainMenu := $HUD/MainMenu
 @onready var N_PlayerCharacter:Node2D = get_node("PlayerCharacter")
 @onready var N_Tree:Node2D = get_node("N_ActionLayer/Tree")
 
+var bestScore := 0
 var score := 0
 var canScorePoint := true
 
@@ -35,6 +36,10 @@ func _on_hud_time_ended() -> void:
 	endGame()
 
 func endGame():
+	if score > bestScore:
+		bestScore = score
+	MainMenu.setBestScore(bestScore)
+	MainMenu.setScore(score)
 	if get_tree():
 		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
 		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
