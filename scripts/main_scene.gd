@@ -11,13 +11,6 @@ var MainMenu = preload("res://scenes/main_menu.tscn")
 var score := 0
 var canScorePoint := true
 
-func _on_hud_player_is_dead() -> void:
-	if get_tree():
-		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
-		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
-		$HUD/MainMenu.visible = true
-		get_tree().paused = true
-
 func _on_player_character_player_got_hit() -> void:
 	canScorePoint = false
 
@@ -34,3 +27,15 @@ func _on_tree_current_position_updated() -> void:
 		score += 1
 		increase_point.emit(score)
 	canScorePoint = true
+
+func _on_hud_player_is_dead() -> void:
+	endGame()
+
+func _on_hud_time_ended() -> void:
+	endGame()
+
+func endGame():
+	if get_tree():
+		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
+		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
+		$HUD/MainMenu.visible = true

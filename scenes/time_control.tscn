@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dioe76nwfonad"]
+
+[ext_resource type="Script" uid="uid://bsydl2qxnknnm" path="res://scripts/time_control.gd" id="1_5iqf6"]
+[ext_resource type="Texture2D" uid="uid://di5a1sjm4xcp7" path="res://assets/ui/timebar_background.png" id="1_g8aip"]
+[ext_resource type="Texture2D" uid="uid://qsor2mak1dou" path="res://assets/ui/timebar_time.png" id="2_5iqf6"]
+
+[node name="TimeControl" type="Control" unique_id=700218530]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_bottom = 20.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.2, 0.2)
+script = ExtResource("1_5iqf6")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=469096546]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -822.0
+offset_right = 822.0
+offset_bottom = 310.0
+grow_horizontal = 2
+value = 100.0
+texture_under = ExtResource("1_g8aip")
+texture_progress = ExtResource("2_5iqf6")
+texture_progress_offset = Vector2(60, 68)

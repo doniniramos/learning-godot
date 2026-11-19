@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dsk3n8uka5gah" path="res://scenes/health_indicator.tscn" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://bu7yv12ur0c01" path="res://scripts/hud.gd" id="1_oo0fn"]
 [ext_resource type="FontFile" uid="uid://c2o3w8s8ayd5v" path="res://assets/fonts/bubblegum_sans_regular.ttf" id="3_5ysmq"]
+[ext_resource type="PackedScene" uid="uid://dioe76nwfonad" path="res://scenes/time_control.tscn" id="3_6fi6k"]
 
 [node name="HUD" type="Control" unique_id=417816807]
 layout_mode = 3
@@ -34,6 +35,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="TimeControl" parent="MarginContainer/VBoxContainer" unique_id=700218530 instance=ExtResource("3_6fi6k")]
+layout_mode = 2
 
 [node name="BestLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1438016131]
 layout_mode = 2
@@ -47,4 +52,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="player_got_hit" from="." to="MarginContainer/HealthIndicator" method="_on_hud_player_got_hit"]
+[connection signal="player_is_dead" from="." to="MarginContainer/VBoxContainer/TimeControl" method="_on_hud_player_is_dead"]
+[connection signal="player_score_point" from="." to="MarginContainer/VBoxContainer/TimeControl" method="_on_hud_player_score_point"]
 [connection signal="player_is_dead" from="MarginContainer/HealthIndicator" to="." method="_on_health_indicator_player_is_dead"]
+[connection signal="time_ended" from="MarginContainer/VBoxContainer/TimeControl" to="." method="_on_time_control_time_ended"]
