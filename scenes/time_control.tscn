@@ -5,12 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://qsor2mak1dou" path="res://assets/ui/timebar_time.png" id="2_5iqf6"]
 
 [node name="TimeControl" type="Control" unique_id=700218530]
-custom_minimum_size = Vector2(0, 20)
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_bottom = 20.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
