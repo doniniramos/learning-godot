@@ -61,10 +61,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
 	Animate(Config.AnimationState.Hit, Config.TreeSide.None)
 	emit_signal('player_got_hit')
+	
 	if get_tree():
-		await get_tree().create_timer(0.25).timeout
+		get_tree().paused = true
+		await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
 		get_tree().paused = false
-
 
 func _on_hud_player_is_dead() -> void:
 	if position.x > 640:
