@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dsk3n8uka5gah" path="res://scenes/health_indicator.tscn" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://bu7yv12ur0c01" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="FontFile" uid="uid://c2o3w8s8ayd5v" path="res://assets/fonts/bubblegum_sans_regular.ttf" id="3_5ysmq"]
 
 [node name="HUD" type="Control" unique_id=417816807]
 layout_mode = 3
@@ -28,6 +29,22 @@ theme_override_constants/margin_bottom = 80
 
 [node name="HealthIndicator" parent="MarginContainer" unique_id=1848978015 instance=ExtResource("1_ahhtf")]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1136401708]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="BestLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1438016131]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8784314, 0.7529412, 1)
+theme_override_colors/font_outline_color = Color(0.30588236, 0.19215687, 0.20784314, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_5ysmq")
+theme_override_font_sizes/font_size = 65
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="player_got_hit" from="." to="MarginContainer/HealthIndicator" method="_on_hud_player_got_hit"]
 [connection signal="player_is_dead" from="MarginContainer/HealthIndicator" to="." method="_on_health_indicator_player_is_dead"]
