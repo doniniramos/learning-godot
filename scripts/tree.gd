@@ -82,6 +82,8 @@ func RelocateTreePartInArray():
 	TREE_PARTS.remove_at(0)
 	if temp != $tree_1:
 		TREE_PARTS.append(temp)
+	
+	emit_signal("current_position_updated")
 
 func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
 	const positionCorrection := 20

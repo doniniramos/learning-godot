@@ -73,6 +73,7 @@ offset_bottom = 720.0
 visible = false
 layout_mode = 1
 
+[connection signal="increase_point" from="." to="HUD" method="_on_main_scene_increase_point"]
 [connection signal="current_position_updated" from="N_ActionLayer/Tree" to="." method="_on_tree_current_position_updated"]
 [connection signal="player_got_hit" from="PlayerCharacter" to="." method="_on_player_character_player_got_hit"]
 [connection signal="player_got_hit" from="PlayerCharacter" to="HUD" method="_on_player_character_player_got_hit"]
