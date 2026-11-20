@@ -4,8 +4,8 @@ signal time_ended
 
 const GAME_TIME_SPEED := 18
 const SCORE_TIME_BONUS := 5
-const RED_COLOR_TIME := 35
-const YELLOW_COLOR_TIME := 65
+const RED_COLOR_TIME := 40
+const YELLOW_COLOR_TIME := 70
 
 var timeRemaining := 100.0
 var isActive := true
@@ -29,10 +29,10 @@ func updateProgressBar():
 	if timeRemaining > YELLOW_COLOR_TIME:
 		$TextureProgressBar.tint_progress = Color(0, 1, 0, 0.5)
 	
-	elif timeRemaining <= YELLOW_COLOR_TIME:
+	if timeRemaining <= YELLOW_COLOR_TIME:
 		$TextureProgressBar.tint_progress = Color(1, 0.8, 0, 0.6)
 	
-	elif timeRemaining <= RED_COLOR_TIME:
+	if timeRemaining <= RED_COLOR_TIME:
 		$TextureProgressBar.tint_progress = Color(1, 0, 0, 0.6)
 
 	$TextureProgressBar.value = timeRemaining
