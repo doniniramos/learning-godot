@@ -11,11 +11,11 @@ func _ready() -> void:
 		var randomGenerator := RandomNumberGenerator.new()
 		var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
 		Rest = (tempFloat % 5)+1
-	
+
 	if BranchSide == Config.TreeSide.Left:
 		var branchTexture: Texture2D = load("res://assets/branches/branch_left_%s.png"%Rest)
 		$Sprite2D.texture = branchTexture
-	
+
 	elif BranchSide == Config.TreeSide.Right:
 		var branchTexture: Texture2D = load("res://assets/branches/branch_right_%s.png"%Rest)
 		$Sprite2D.texture = branchTexture

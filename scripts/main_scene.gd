@@ -42,8 +42,10 @@ func endGame():
 	if score > bestScore:
 		bestScore = score
 		save_score()
+
 	MainMenu.setBestScore(bestScore)
 	MainMenu.setScore(score)
+
 	if get_tree():
 		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
 		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
@@ -56,9 +58,9 @@ func save_score():
 func load_score():
 	if not FileAccess.file_exists("user://savegame.save"):
 		return
-	
+
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	var loadedScore = save_file.get_var()
-	
+
 	if loadedScore != null:
 		bestScore = int(loadedScore)

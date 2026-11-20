@@ -47,7 +47,7 @@ func MoveAllLogsDown(side: Config.TreeSide):
 					branch.free()
 		else:
 			tween.tween_property(TREE_PARTS[i],"position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.05).set_trans(Tween.TRANS_SPRING)
-	
+
 	TossLog(side, 1)
 	RelocateTreePartInArray()
 	AddRandomBranchSide(TREE_PARTS.size()-1)
@@ -65,9 +65,9 @@ func AddRandomBranchSide(index: int):
 	var randomGenerator := RandomNumberGenerator.new()
 	var tempFloat := floori(randomGenerator.randf_range(1.0, 100.00))
 	var rest := tempFloat % 3
-	
+
 	var XOffset:float = (TREE_PARTS[index] as Sprite2D).texture.get_size().x / 2 * (TREE_PARTS[index] as Sprite2D).scale.x 
-	
+
 	if (rest == 0 and LAST_SIDE != Config.TreeSide.Left): # Left
 		hasAddedABranch = true
 		var branch = Branch.instantiate()
@@ -75,7 +75,7 @@ func AddRandomBranchSide(index: int):
 		branch.get_node("Sprite2D").texture_changed.connect(_on_sprite_texture_changed.bind(branch, Config.TreeSide.Left, XOffset))
 		TREE_PARTS[index].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Left
-	
+
 	if (rest == 1 and LAST_SIDE != Config.TreeSide.Right and !hasAddedABranch): # Right
 		var branch = Branch.instantiate()
 		branch.BranchSide = Config.TreeSide.Right
@@ -87,11 +87,11 @@ func AddRandomBranchSide(index: int):
 # Move Tree Part from Start to End of Tree Parts Array
 func RelocateTreePartInArray():
 	var temp:Sprite2D = TREE_PARTS[0]
-	
+
 	TREE_PARTS.remove_at(0)
 	if temp != $tree_1:
 		TREE_PARTS.append(temp)
-	
+
 	emit_signal("current_position_updated")
 
 
@@ -104,29 +104,29 @@ func TossLog(side: Config.TreeSide, currentIndex: int):
 	sprite.texture = TREE_PARTS[currentIndex].texture
 	sprite.global_position = Vector2($".".global_position.x, $".".global_position.y - 110)
 	sprite.scale = $".".scale
-	
+
 	var sideVector: Vector2
-	
+
 	if side == Config.TreeSide.Left:
 		sideVector = Vector2(1280,-200)
 	elif side == Config.TreeSide.Right:
 		sideVector = Vector2(-1280,-200)
-	
+
 	var tween := get_tree().create_tween().set_parallel(true)
 	tween.tween_property(sprite, "position", global_position + sideVector, tweenPropertyTime)
 	tween.tween_property(sprite, "rotation", PI, tweenPropertyTime*2)
-	
+
 	tween.chain().tween_callback(sprite.queue_free)
 
 
 func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
 	const positionCorrection := 20
 	var xPosition := 0.0
-	
+
 	if (side == Config.TreeSide.Left):
 		xPosition = -XOffset-(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) - positionCorrection
-	
+
 	if (side == Config.TreeSide.Right):
 		xPosition = XOffset+(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) + positionCorrection
-	
+
 	branch.position = Vector2(xPosition, 0)

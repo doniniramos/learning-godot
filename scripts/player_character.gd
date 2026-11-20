@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 		MoveToPosition(Config.TreeSide.Left)
 		canReceiveInput = false
 		ResetInputCooldown()
+
 	if Input.is_action_just_pressed("CutRight", true) and canReceiveInput:
 		MoveToPosition(Config.TreeSide.Right)
 		canReceiveInput = false
@@ -42,7 +43,7 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 
 	if position.y != 500:
 		position.y = 500
-	
+
 	Animate(Config.AnimationState.Chop, playerPosition)
 
 
@@ -50,15 +51,15 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 func Animate(state: Config.AnimationState, side: Config.TreeSide):
 	if state == Config.AnimationState.Idle:
 		$AnimatedSprite2D.play("idle")
-		
+
 	elif state == Config.AnimationState.Dead:
 		$AnimatedSprite2D.play("dead")
-	
+
 	elif state == Config.AnimationState.Chop:
 		$AnimatedSprite2D.play("chop")
 		$AnimatedSprite2D.flip_h = side == Config.TreeSide.Left
 		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
-	
+
 	elif state == Config.AnimationState.Hit:
 		$AnimatedSprite2D.play("hit")
 		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
@@ -71,11 +72,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 	life -= 1
 
-	if life > 0:
-		if get_tree():
-			get_tree().paused = true
-			await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
-			get_tree().paused = false
+	if life > 0 and get_tree():
+		get_tree().paused = true
+		await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
+		get_tree().paused = false
 
 
 func _on_hud_player_is_dead() -> void:
@@ -83,7 +83,7 @@ func _on_hud_player_is_dead() -> void:
 		position.x = position.x + 110
 	else:
 		position.x = position.x - 110
-	
+
 	position.y = 545.0
-		
+
 	Animate(Config.AnimationState.Dead, Config.TreeSide.None)
