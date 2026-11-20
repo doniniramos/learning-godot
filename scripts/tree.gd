@@ -120,7 +120,7 @@ func TossLog(side: Config.TreeSide, currentIndex: int):
 func push_to_pool(log: Sprite2D):
 	if !logTossedPool.is_empty():
 		logTossedPool.remove_at(0)
-		
+
 	log.set_process(false)
 	log.set_physics_process(false)
 	log.hide()
@@ -137,14 +137,14 @@ func pull_from_pool(texture: Texture2D) -> Sprite2D:
 		logPool.remove_at(0)
 
 	logTossedPool.append(sprite)
-	
+
 	sprite.texture = texture
 	sprite.global_position = Vector2($".".global_position.x, $".".global_position.y - 110)
 	sprite.scale = $".".scale
 	sprite.set_process(true)
 	sprite.set_physics_process(true)
 	sprite.show()
-	
+
 	return sprite
 
 
