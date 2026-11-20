@@ -37,8 +37,9 @@ func ResetInputCooldown():
 func MoveToPosition(playerPosition: Config.TreeSide):
 	if playerPosition == Config.TreeSide.Left:
 		position.x = originalPosition.x -210;
-	if playerPosition == Config.TreeSide.Right:
+	elif playerPosition == Config.TreeSide.Right:
 		position.x = originalPosition.x +210;
+
 	if position.y != 500:
 		position.y = 500
 	
@@ -50,15 +51,15 @@ func Animate(state: Config.AnimationState, side: Config.TreeSide):
 	if state == Config.AnimationState.Idle:
 		$AnimatedSprite2D.play("idle")
 		
-	if state == Config.AnimationState.Dead:
+	elif state == Config.AnimationState.Dead:
 		$AnimatedSprite2D.play("dead")
 	
-	if state == Config.AnimationState.Chop:
+	elif state == Config.AnimationState.Chop:
 		$AnimatedSprite2D.play("chop")
 		$AnimatedSprite2D.flip_h = side == Config.TreeSide.Left
 		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
 	
-	if state == Config.AnimationState.Hit:
+	elif state == Config.AnimationState.Hit:
 		$AnimatedSprite2D.play("hit")
 		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
 
@@ -67,9 +68,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
 	Animate(Config.AnimationState.Hit, Config.TreeSide.None)
 	emit_signal('player_got_hit')
-	
+
 	life -= 1
-	
+
 	if life > 0:
 		if get_tree():
 			get_tree().paused = true
