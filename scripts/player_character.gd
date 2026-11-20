@@ -13,6 +13,7 @@ func _ready() -> void:
 	originalPosition = position
 	Animate(Config.AnimationState.Idle, Config.TreeSide.None)
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("CutLeft", true) and CanReceiveInput:
@@ -24,10 +25,12 @@ func _process(delta: float) -> void:
 		CanReceiveInput = false
 		ResetInputCooldown()
 
+
 func ResetInputCooldown():
 	if get_tree():
 		await get_tree().create_timer(Config.INPUT_COOLDOWN_TIME).timeout
 		CanReceiveInput = true
+
 
 # Move to position (Left, Right)
 func MoveToPosition(playerPosition: Config.TreeSide):
@@ -39,6 +42,7 @@ func MoveToPosition(playerPosition: Config.TreeSide):
 		position.y = 500
 	
 	Animate(Config.AnimationState.Chop, playerPosition)
+
 
 # Animate (Idle, Chop, Hit)
 func Animate(state: Config.AnimationState, side: Config.TreeSide):
@@ -57,6 +61,7 @@ func Animate(state: Config.AnimationState, side: Config.TreeSide):
 		$AnimatedSprite2D.play("hit")
 		$AnimatedSprite2D.animation_finished.connect(func(): Animate(Config.AnimationState.Idle, side))
 
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
 	Animate(Config.AnimationState.Hit, Config.TreeSide.None)
@@ -66,6 +71,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		get_tree().paused = true
 		await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
 		get_tree().paused = false
+
 
 func _on_hud_player_is_dead() -> void:
 	if position.x > 640:

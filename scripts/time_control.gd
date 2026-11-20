@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 			timeRemaining -= delta * GAME_TIME_SPEED
 		updateProgressBar()
 
+
 func updateProgressBar():
 	if timeRemaining < 0:
 		timeRemaining = 0
@@ -33,9 +34,11 @@ func updateProgressBar():
 
 	$TextureProgressBar.value = timeRemaining
 
+
 func _on_hud_player_score_point() -> void:
 	if timeRemaining < 100:
 		timeRemaining += SCORE_TIME_BONUS
+
 
 func _on_hud_player_is_dead() -> void:
 	isActive = false
