@@ -26,11 +26,14 @@ func updateProgressBar():
 	if timeRemaining > 100:
 		timeRemaining = 100
 	
-	if timeRemaining <= YELLOW_COLOR_TIME:
-		$TextureProgressBar.tint_progress = Color(1,1,0,0.5)
+	if timeRemaining > YELLOW_COLOR_TIME:
+		$TextureProgressBar.tint_progress = Color(0, 1, 0, 0.5)
 	
-	if timeRemaining <= RED_COLOR_TIME:
-		$TextureProgressBar.tint_progress = Color(1,0,0,0.5)
+	elif timeRemaining <= YELLOW_COLOR_TIME:
+		$TextureProgressBar.tint_progress = Color(1, 0.8, 0, 0.6)
+	
+	elif timeRemaining <= RED_COLOR_TIME:
+		$TextureProgressBar.tint_progress = Color(1, 0, 0, 0.6)
 
 	$TextureProgressBar.value = timeRemaining
 
