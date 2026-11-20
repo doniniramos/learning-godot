@@ -78,6 +78,7 @@ layout_mode = 1
 [connection signal="player_got_hit" from="PlayerCharacter" to="." method="_on_player_character_player_got_hit"]
 [connection signal="player_got_hit" from="PlayerCharacter" to="HUD" method="_on_player_character_player_got_hit"]
 [connection signal="player_is_dead" from="HUD" to="." method="_on_hud_player_is_dead"]
+[connection signal="player_is_dead" from="HUD" to="N_ActionLayer/Tree" method="_on_hud_player_is_dead"]
 [connection signal="player_is_dead" from="HUD" to="PlayerCharacter" method="_on_hud_player_is_dead"]
 [connection signal="time_ended" from="HUD" to="." method="_on_hud_time_ended"]
 [connection signal="HomeButtonPressed" from="HUD/MainMenu" to="." method="_on_main_menu_home_button_pressed"]

@@ -9,6 +9,9 @@ const TREE_PART_SIZE: float = 311;
 const TREE_POSITION_ARRAY: Array[float] = [-298, -609, -920, -1231, -1542, -1853, -2164]
 
 var TREE_PARTS: Array[Sprite2D]
+var logPool:Array[Sprite2D] = []
+var logTossedPool:Array[Sprite2D] = []
+
 var LAST_SIDE := Config.TreeSide.None
 var canReceiveInput := true
 
@@ -46,7 +49,7 @@ func MoveAllLogsDown(side: Config.TreeSide):
 				for branch in branches:
 					branch.free()
 		else:
-			tween.tween_property(TREE_PARTS[i],"position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.05).set_trans(Tween.TRANS_SPRING)
+			tween.tween_property(TREE_PARTS[i],"position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.06).set_trans(Tween.TRANS_CUBIC)
 
 	TossLog(side, 1)
 	RelocateTreePartInArray()
@@ -98,13 +101,6 @@ func RelocateTreePartInArray():
 # Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
 func TossLog(side: Config.TreeSide, currentIndex: int):
 	const tweenPropertyTime := 0.5
-	
-	var sprite := Sprite2D.new()
-	get_tree().current_scene.add_child(sprite)
-	sprite.texture = TREE_PARTS[currentIndex].texture
-	sprite.global_position = Vector2($".".global_position.x, $".".global_position.y - 110)
-	sprite.scale = $".".scale
-
 	var sideVector: Vector2
 
 	if side == Config.TreeSide.Left:
@@ -112,11 +108,44 @@ func TossLog(side: Config.TreeSide, currentIndex: int):
 	elif side == Config.TreeSide.Right:
 		sideVector = Vector2(-1280,-200)
 
+	var sprite = pull_from_pool(TREE_PARTS[currentIndex].texture)
+	get_tree().current_scene.add_child(sprite)
+	
 	var tween := get_tree().create_tween().set_parallel(true)
 	tween.tween_property(sprite, "position", global_position + sideVector, tweenPropertyTime)
 	tween.tween_property(sprite, "rotation", PI, tweenPropertyTime*2)
 
-	tween.chain().tween_callback(sprite.queue_free)
+	tween.chain().tween_callback(push_to_pool.bind(sprite))
+
+func push_to_pool(log: Sprite2D):
+	if !logTossedPool.is_empty():
+		logTossedPool.remove_at(0)
+		
+	log.set_process(false)
+	log.set_physics_process(false)
+	log.hide()
+	logPool.append(log)
+
+
+func pull_from_pool(texture: Texture2D) -> Sprite2D:
+	var sprite:Sprite2D
+
+	if logPool.is_empty():
+		sprite = Sprite2D.new()
+	else:
+		sprite = logPool[0]
+		logPool.remove_at(0)
+
+	logTossedPool.append(sprite)
+	
+	sprite.texture = texture
+	sprite.global_position = Vector2($".".global_position.x, $".".global_position.y - 110)
+	sprite.scale = $".".scale
+	sprite.set_process(true)
+	sprite.set_physics_process(true)
+	sprite.show()
+	
+	return sprite
 
 
 func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
@@ -130,3 +159,8 @@ func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: 
 		xPosition = XOffset+(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) + positionCorrection
 
 	branch.position = Vector2(xPosition, 0)
+
+
+func _on_hud_player_is_dead() -> void:
+	for log in logTossedPool:
+		log.hide()
