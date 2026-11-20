@@ -16,6 +16,7 @@ func _ready() -> void:
 	TREE_PARTS = [$tree_1, $tree_2, $tree_3, $tree_4, $tree_5, $tree_6, $tree_7]
 	GenerateBranchesSideArray()
 
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("CutLeft", true) and canReceiveInput:
 		MoveAllLogsDown(Config.TreeSide.Left)
@@ -26,33 +27,38 @@ func _process(delta: float) -> void:
 		canReceiveInput = false
 		ResetInputCooldown()
 
+
 func ResetInputCooldown():
 	if get_tree():
 		await get_tree().create_timer(Config.INPUT_COOLDOWN_TIME).timeout
 		canReceiveInput = true
-	
+
+
 # All logs down :: Drops all logs one level
-func MoveAllLogsDown(side: Config.TreeSide):
+func MoveAllLogsDown(side: Config.TreeSide):	
 	var tween := get_tree().create_tween()
 	for i in TREE_PARTS.size():
 		if (TREE_PARTS[i].position.y + TREE_PART_SIZE > 0):
 			TREE_PARTS[i].position = Vector2(0, TREE_POSITION_ARRAY.back())
-			
+
 			if TREE_PARTS[i].get_child_count() > 0:
 				var branches := TREE_PARTS[i].get_children()
 				for branch in branches:
 					branch.free()
 		else:
 			tween.tween_property(TREE_PARTS[i],"position", Vector2(0, TREE_POSITION_ARRAY[i-1]), 0.05).set_trans(Tween.TRANS_SPRING)
-
+	
+	TossLog(side, 1)
 	RelocateTreePartInArray()
 	AddRandomBranchSide(TREE_PARTS.size()-1)
+
 
 # Generate Random Branch: Generates a random log at the top
 func GenerateBranchesSideArray():
 	for i in range(2, 7, 2):
 		AddRandomBranchSide(i)
-	
+
+
 # Attach Random Branch to Tree
 func AddRandomBranchSide(index: int):
 	var hasAddedABranch := false
@@ -77,6 +83,7 @@ func AddRandomBranchSide(index: int):
 		TREE_PARTS[index].add_child(branch)
 		LAST_SIDE = Config.TreeSide.Right
 
+
 # Move Tree Part from Start to End of Tree Parts Array
 func RelocateTreePartInArray():
 	var temp:Sprite2D = TREE_PARTS[0]
@@ -86,6 +93,31 @@ func RelocateTreePartInArray():
 		TREE_PARTS.append(temp)
 	
 	emit_signal("current_position_updated")
+
+
+# Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
+func TossLog(side: Config.TreeSide, currentIndex: int):
+	const tweenPropertyTime := 0.5
+	
+	var sprite := Sprite2D.new()
+	get_tree().current_scene.add_child(sprite)
+	sprite.texture = TREE_PARTS[currentIndex].texture
+	sprite.global_position = Vector2($".".global_position.x, $".".global_position.y - 110)
+	sprite.scale = $".".scale
+	
+	var sideVector: Vector2
+	
+	if side == Config.TreeSide.Left:
+		sideVector = Vector2(1280,-200)
+	elif side == Config.TreeSide.Right:
+		sideVector = Vector2(-1280,-200)
+	
+	var tween := get_tree().create_tween().set_parallel(true)
+	tween.tween_property(sprite, "position", global_position + sideVector, tweenPropertyTime)
+	tween.tween_property(sprite, "rotation", PI, tweenPropertyTime*2)
+	
+	tween.chain().tween_callback(sprite.queue_free)
+
 
 func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: float):
 	const positionCorrection := 20
@@ -98,5 +130,3 @@ func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: 
 		xPosition = XOffset+(branch.get_node("Sprite2D").texture.get_size().x / 2 * branch.scale.x) + positionCorrection
 	
 	branch.position = Vector2(xPosition, 0)
-
-# Tossing Log (Direction: Left, Right) :: Make a log sprite launch like on a projectile arc
