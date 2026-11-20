@@ -6,8 +6,9 @@ signal player_got_hit
 
 @export var CURRENT_POSITION := Config.TreeSide.None
 
+var canReceiveInput := true
+var life := 3
 var originalPosition: Vector2 = Vector2(0,0)
-var CanReceiveInput := true
 
 func _ready() -> void:
 	originalPosition = position
@@ -16,20 +17,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("CutLeft", true) and CanReceiveInput:
+	if Input.is_action_just_pressed("CutLeft", true) and canReceiveInput:
 		MoveToPosition(Config.TreeSide.Left)
-		CanReceiveInput = false
+		canReceiveInput = false
 		ResetInputCooldown()
-	if Input.is_action_just_pressed("CutRight", true) and CanReceiveInput:
+	if Input.is_action_just_pressed("CutRight", true) and canReceiveInput:
 		MoveToPosition(Config.TreeSide.Right)
-		CanReceiveInput = false
+		canReceiveInput = false
 		ResetInputCooldown()
 
 
 func ResetInputCooldown():
 	if get_tree():
 		await get_tree().create_timer(Config.INPUT_COOLDOWN_TIME).timeout
-		CanReceiveInput = true
+		canReceiveInput = true
 
 
 # Move to position (Left, Right)
@@ -67,10 +68,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	Animate(Config.AnimationState.Hit, Config.TreeSide.None)
 	emit_signal('player_got_hit')
 	
-	if get_tree():
-		get_tree().paused = true
-		await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
-		get_tree().paused = false
+	life -= 1
+	
+	if life > 0:
+		if get_tree():
+			get_tree().paused = true
+			await get_tree().create_timer(Config.HIT_FREEZE_TIME).timeout
+			get_tree().paused = false
 
 
 func _on_hud_player_is_dead() -> void:
