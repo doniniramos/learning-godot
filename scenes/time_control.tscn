@@ -30,3 +30,4 @@ value = 100.0
 texture_under = ExtResource("1_g8aip")
 texture_over = ExtResource("3_5iqf6")
 texture_progress = ExtResource("2_5iqf6")
+tint_progress = Color(0, 1, 0, 0.5019608)
