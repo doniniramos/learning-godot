@@ -109,7 +109,9 @@ func TossLog(side: Config.TreeSide, currentIndex: int):
 		sideVector = Vector2(-1280,-200)
 
 	var sprite = pull_from_pool(TREE_PARTS[currentIndex].texture)
-	get_tree().current_scene.add_child(sprite)
+	
+	if sprite.get_parent() != get_tree().current_scene:
+		get_tree().current_scene.add_child(sprite)
 	
 	var tween := get_tree().create_tween().set_parallel(true)
 	tween.tween_property(sprite, "position", global_position + sideVector, tweenPropertyTime)

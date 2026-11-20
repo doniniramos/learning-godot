@@ -47,8 +47,9 @@ func endGame():
 	MainMenu.setScore(score)
 
 	if get_tree():
-		$PlayerCharacter.process_mode = Node.PROCESS_MODE_DISABLED
-		$N_ActionLayer/Tree.process_mode = Node.PROCESS_MODE_DISABLED
+		$PlayerCharacter.set_process(false)
+		$PlayerCharacter.set_physics_process(false)
+		$N_ActionLayer/Tree.set_process(false)
 		$HUD/MainMenu.visible = true
 
 func save_score():
