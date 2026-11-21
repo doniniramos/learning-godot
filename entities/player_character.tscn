@@ -19,6 +19,10 @@ region = Rect2(0, 4644, 1798, 1161)
 atlas = ExtResource("2_t8xdw")
 region = Rect2(0, 3483, 1798, 1161)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_628v7"]
+atlas = ExtResource("2_t8xdw")
+region = Rect2(1798, 3483, 1798, 1161)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xosu"]
 atlas = ExtResource("2_t8xdw")
 region = Rect2(0, 2322, 1798, 1161)
@@ -90,6 +94,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t8xdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_628v7")
 }],
 "loop": 1,
 "name": &"dead",
@@ -159,7 +166,8 @@ script = ExtResource("1_yqde8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1713956342]
 sprite_frames = SubResource("SpriteFrames_qeab4")
-animation = &"idle"
+animation = &"dead"
+frame_progress = 0.6470022
 
 [node name="Area2D" type="Area2D" parent="." unique_id=807902788]
 
