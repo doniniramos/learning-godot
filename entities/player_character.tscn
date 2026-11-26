@@ -160,6 +160,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgflt"]
 size = Vector2(481.0811, 894.5946)
 
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_kgflt"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_t8xdw"]
+
 [node name="PlayerCharacter" type="Node2D" unique_id=1709040866]
 scale = Vector2(0.37, 0.37)
 script = ExtResource("1_yqde8")
@@ -174,6 +178,16 @@ frame_progress = 0.6470022
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=617291886]
 position = Vector2(0, 1.3513565)
 shape = SubResource("RectangleShape2D_kgflt")
+
+[node name="AudioStreamPlayerDash" type="AudioStreamPlayer2D" parent="." unique_id=1121437140]
+stream = SubResource("AudioStreamPolyphonic_kgflt")
+volume_db = -8.0
+max_polyphony = 20
+
+[node name="AudioStreamPlayerHit" type="AudioStreamPlayer2D" parent="." unique_id=1345726014]
+stream = SubResource("AudioStreamPolyphonic_t8xdw")
+volume_db = -6.0
+max_polyphony = 20
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
