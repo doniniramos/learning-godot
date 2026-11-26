@@ -8,13 +8,19 @@ const RED_COLOR_TIME := 40
 const YELLOW_COLOR_TIME := 70
 
 var timeRemaining := 100.0
-var isActive := true
+var isActive := false
 
 func _process(delta: float) -> void:
 	if isActive:
 		if timeRemaining > 0:
 			timeRemaining -= delta * GAME_TIME_SPEED
 		updateProgressBar()
+
+	if Input.is_action_just_pressed("CutLeft", true) and !isActive:
+		isActive = true
+
+	if Input.is_action_just_pressed("CutRight", true) and !isActive:
+		isActive = true
 
 
 func updateProgressBar():
