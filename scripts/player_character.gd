@@ -5,11 +5,11 @@ const Config = preload("res://scripts/config.gd")
 const maxPitchVariation := 1.15
 const minPitchVariation := 0.9
 
-const maxVolumeDB := -6.0
+const maxVolumeDB := -10.0
 const minVolumeDB := -16.0
 
-const volumeDecreaseAmount := 5
-const volumeIncreaseAmount := 2.0
+const volumeDecreaseAmount := 4
+const volumeIncreaseAmount := 0.8
 
 var volumeDB := -16.0
 
@@ -62,8 +62,6 @@ func _process(delta: float) -> void:
 		
 		if volumeDB < minVolumeDB:
 			volumeDB = minVolumeDB
-	
-	print(volumeDB)
 
 
 func ResetInputCooldown():
@@ -129,7 +127,7 @@ func PlaySounds():
 		
 		if volumeDB > maxVolumeDB:
 			volumeDB = maxVolumeDB
-	
+
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.process_mode = Node.PROCESS_MODE_DISABLED
