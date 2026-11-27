@@ -12,12 +12,12 @@ func _ready() -> void:
 		move_buttons(true)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("CutLeft", true):
-		self.free()
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("CutLeft", false):
+		self.queue_free()
 
-	if Input.is_action_just_pressed("CutRight", true):
-		self.free()
+	if Input.is_action_just_pressed("CutRight", false):
+		self.queue_free()
 
 
 func move_buttons(up: bool):

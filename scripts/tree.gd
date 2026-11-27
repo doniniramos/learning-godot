@@ -20,11 +20,12 @@ func _ready() -> void:
 	GenerateBranchesSideArray()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("CutLeft", true) and canReceiveInput:
 		MoveAllLogsDown(Config.TreeSide.Left)
 		canReceiveInput = false
 		ResetInputCooldown()
+
 	if Input.is_action_just_pressed("CutRight", true) and canReceiveInput:
 		MoveAllLogsDown(Config.TreeSide.Right)
 		canReceiveInput = false
@@ -123,14 +124,14 @@ func TossLog(side: Config.TreeSide, currentIndex: int):
 
 	tween.chain().tween_callback(push_to_pool.bind(sprite))
 
-func push_to_pool(log: Sprite2D):
+func push_to_pool(logPart: Sprite2D):
 	if !logTossedPool.is_empty():
 		logTossedPool.remove_at(0)
 
-	log.set_process(false)
-	log.set_physics_process(false)
-	log.hide()
-	logPool.append(log)
+	logPart.set_process(false)
+	logPart.set_physics_process(false)
+	logPart.hide()
+	logPool.append(logPart)
 
 
 func pull_from_pool(texture: Texture2D) -> Sprite2D:
@@ -168,5 +169,5 @@ func _on_sprite_texture_changed(branch: Area2D, side: Config.TreeSide, XOffset: 
 
 
 func _on_hud_player_is_dead() -> void:
-	for log in logTossedPool:
-		log.hide()
+	for logPart in logTossedPool:
+		logPart.hide()
